@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/carta.css">
+    <link rel="icon" href="../imagenes/corazon10.png" type="image/png">
+    <title>CARTITAA</title>
+</head>
+<body>
+    <h1>💕Felices 10 meses mi amor.💕</h1>
+    <p> Holi mi amochitoo, si estas leyendo esto, es porque cumplimos 10 mesesitossss (y vamos a cumplir mucho mas).
+        <br>
+        <br>    Amor, primero quiero agradecerte por todo lo que haces por mi, por todo el amor que me das, por todo lo que me enseñas, por todo lo que me haces sentir, por todo lo que me haces reir y llorar de felicidad, por todo lo que compartimos juntos, por todo lo que hemos vivido y por todo lo que nos queda por vivir.
+        <br>
+        <br>    Te amo con todo mi corazón, y quiero que sepas que siempre estaré a tu lado, apoyándote en todo lo que necesites, y amándote cada día más.
+
+        <br>
+        <br>    Hoy cumplimos 10 mesesitos, y quiero que sepas que cada día que pasa, te amo más y más. Eres la persona más importante de mi vida, y no puedo imaginar un futuro sin ti a mi lado.
+        <br>
+        <br>    No puedo esperar a seguir juntitoss, que pasen los años y formar una familia juntos, y que podamos cumplir todos nuestros sueños juntos.
+        <br>
+        <br>Gracias por ser mi compañera de vida, gracias por compartir todo conmigo, gracias por los chismecitoss ajksdjaskdkja.
+        <br>
+        <br>    Te amo con todo mi corazón, y siempre estaré aquí para ti, apoyándote en todo lo que necesites, y amándote cada día más.
+        <br>
+        <br>    Espero que te guste esta cartita, soy malisimo haciendo esto, pero tenia que decirte lo mucho que te amo mi amor, la hice con mucho amor para ti mi amochito.
+    </p>
+    <button id="descargarPDF">Click acá para descargar la cartita mi amor</button>
+    <a href="../index.html"><button>Volver al inicio</button></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+document.getElementById('descargarPDF').onclick = function() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+        putOnlyUsedFonts:true
+    });
+
+    // Colores y detalles románticos
+    doc.setDrawColor(251, 177, 200); // Borde rosa
+    doc.setLineWidth(2);
+    doc.roundedRect(7, 7, 196, 283, 15, 15, 'S');
+
+    // Título con emoji y color
+    doc.setTextColor(215, 38, 96);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.text('Felices 10 meses mi amor', 105, 28, { align: 'center' });
+
+    // Línea decorativa
+    doc.setDrawColor(215, 38, 96);
+    doc.line(40, 33, 170, 33);
+
+    // Texto de la carta
+    doc.setFont('times', 'normal');
+    doc.setFontSize(14);
+    doc.setTextColor(184, 0, 76);
+
+    const carta = document.querySelector('p').innerText;
+    const lines = doc.splitTextToSize(carta, 170);
+
+    let y = 45;
+    const lineHeight = 7;
+    const bottomMargin = 25;
+    const pageHeight = 297;
+    const maxY = pageHeight - bottomMargin;
+
+    lines.forEach(line => {
+        if (y > maxY) {
+            // Pie de página romántico en cada hoja
+            doc.setFontSize(12);
+            doc.setTextColor(215, 38, 96);
+            doc.text('Hecho con todo mi amor para vos', 105, 285, { align: 'center' });
+
+            doc.addPage();
+            // Redibujar borde y título solo en la primera página
+            doc.setDrawColor(251, 177, 200);
+            doc.setLineWidth(2);
+            doc.roundedRect(7, 7, 196, 283, 15, 15, 'S');
+            y = 25;
+        }
+        doc.setFontSize(14);
+        doc.setTextColor(184, 0, 76);
+        doc.text(line, 20, y);
+        y += lineHeight;
+    });
+
+    // Emoji decorativo solo en la última página
+    doc.setFontSize(40);
+    doc.text('', 180, 275);
+
+    // Pie de página romántico en la última hoja
+    doc.setFontSize(12);
+    doc.setTextColor(215, 38, 96);
+    doc.text('Hecho con todo mi amor para vos', 105, 285, { align: 'center' });
+
+    doc.save('cartita-10-meses.pdf');
+};
+</script>
+</body>
+</html>
